@@ -1,0 +1,6 @@
+$vmConfig = New-AzVMConfig 
+$sshPublicKey = Get-Content "$env:USERPROFILE\.ssh\id_rsa.pub"
+Add-AzVMSshPublicKey -VM $vmconfig -KeyData $sshPublicKey -Path "/home/$env:USERNAME/.ssh/authorized_keys"
+$resourceGroup = "exercicessh"
+$location = "francecentral"
+New-AzVM -ResourceGroupName $resourceGroup -Location $location -VM $vmConfig 
